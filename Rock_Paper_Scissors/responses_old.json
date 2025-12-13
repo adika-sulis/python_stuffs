@@ -1,9 +1,7 @@
 {
-    "en": {
-        "name": ">>> ROCK PAPER SCISSORS <<<"
-    },
-    "hu": {
-        "name": ">>> KŐ PAPÍR OLLÓ <<<"
+    "name": {
+        "hu": ">>> KŐ PAPÍR OLLÓ <<<",
+        "en": ">>> ROCK PAPER SCISSORS <<<"
     },
     "errors": {
         "lang_errors": {
