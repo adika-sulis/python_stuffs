@@ -1,25 +1,81 @@
-import os
-import random
+import os, random, json
+from string import Template as template
+
+with open("Rock_Paper_Scissors/responses.json", "r", encoding="utf-8") as f:
+    responses = json.load(f)
+
 def clear():
     os.system("cls" if os.name == "nt" else "clear")
 
 userPont = 0
 compPont = 0
 choiceLIST = ["k", "p", "o"]
+langList = ["hu", "en"]
+lang = "en"
+
+class resp():
+    response_name = responses["name"][lang]
+    response_errors = responses["errors"]["lang_errors"]
+    response_max_points = responses["max_point"][lang]
+clear()
+
+lang = input("Kérlek válaszd ki a nyelvet / Please choose the language:\n    >> Magyar (hu) | English (en) <<    ")
+
+if lang.lower() == "magyar" or lang.lower() == "hu":
+    lang = "hu"
+elif lang.lower() == "english" or lang.lower() == "en":
+    lang = "en"
+elif lang not in langList:
+    lang="undefined"
+    msg_response = template(resp.response_errors[lang]).substitute(
+    langList=", ".join(langList)
+)
+    clear()
+    print(msg_response)
+    exit()
+else:
+    print("Unexpected error! Leaving imideately...")
+    exit()
+
+msg_response = template(resp.response_errors[lang]).substitute(
+    lang = lang,
+    langList=", ".join(langList)
+)
 
 clear()
-print(">>> KŐ PAPÍR OLLÓ <<<")
-maxPoint = int(input("\nKérlek add meg, hogy hány pontig menjen!\nMegjegyzés: Addig meg, amíg Te vagy a Gép el nem éri a megadott pontszámot!   "))
+resp()
+print(resp.response_name)
+maxPoint = int(input(resp.response_max_points))
+
+if maxPoint <= 0:
+    print(f"\nNot a valid point input!\nYour input: {maxPoint}\nPlease restart the game, and choose a valid positive integer number!")
+    exit()
+elif maxPoint > 100:
+    print(f"\nThe maximum point limit is 100!\nYour input: {maxPoint}\nPlease restart the game, and choose a valid positive integer number under 100!")
+    exit()
+elif maxPoint > 0 and maxPoint <=100:
+    pass
+else:
+    print("Unexpected error! Leaving imideately...")
+    exit()
 
 class comp:
     def __init__(self):
         self.choice = random.choice(choiceLIST)
-        if self.choice == "o":
-            self.irasban = "olló"
-        elif self.choice == "p":
-            self.irasban = "papír"
-        else:
-            self.irasban = "kő"
+        if lang == "hu":
+            if self.choice == "o":
+                self.irasban = "olló"
+            elif self.choice == "p":
+                self.irasban = "papír"
+            else:
+                self.irasban = "kő"
+        elif lang == "en":
+            if self.choice == "o" or self.choice == "s":
+                self.irasban = "scissors"
+            elif self.choice == "p":
+                self.irasban = "paper"
+            else:
+                self.irasban = "rock"
 
     def game(self):
         global userPont

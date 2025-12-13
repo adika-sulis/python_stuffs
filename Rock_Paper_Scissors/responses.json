@@ -1,0 +1,18 @@
+{
+    "name": {
+        "hu":">>> KŐ PAPÍR OLLÓ <<<",
+        "en":">>> ROCK PAPER SCISSORS <<<"
+    },
+    "errors": {
+        "lang_errors": {
+            "hu" : "\nÉrvénytelen nyelv bemenet!\nKérlek indítsd újra a játékot, és válassz egy érvényes nyelvet a listából!\nTámogatott nyelvek: $langList\n",
+            "en" : "\nNot a valid language input!\nPlease restart the game, and choose a valid language from the list!\nSupported languages: $langList\n",
+            "undefined": "\nNot a valid language input!\nPlease restart the game, and choose a valid language from the list!\nSupported languages: $langList\n\nÉrvénytelen nyelv bemenet!\nKérlek indítsd újra a játékot, és válassz egy érvényes nyelvet a listából!\nTámogatott nyelvek: $langList\n"
+        }
+
+    },
+    "max_point": {
+            "hu" : "\nKérlek add meg, hogy hány pontig menjen!\nMegjegyzés: Addig meg, amíg Te vagy a Gép el nem éri a megadott pontszámot!   ",
+            "en" : "\nPlease specify the maximum amount of points!\nNote: The game will continue until You or the Computer reaches the specified amount of points!   "
+        }
+}
