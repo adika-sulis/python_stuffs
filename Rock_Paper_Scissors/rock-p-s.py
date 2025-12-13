@@ -14,10 +14,13 @@ langList = ["hu", "en"]
 lang = "en"
 
 class resp():
-    response_name = responses["name"][lang]
+    response_name = responses["name"]
     response_errors = responses["errors"]["lang_errors"]
-    response_max_points = responses["max_point"][lang]
+    response_max_points = responses["max_point_limit"]
+    response_max_points_too_low = responses["errors"]["too_low"]
+    response_max_points_too_high = responses["errors"]["too_high"]
 clear()
+resp()
 
 lang = input("Kérlek válaszd ki a nyelvet / Please choose the language:\n    >> Magyar (hu) | English (en) <<    ")
 
@@ -43,9 +46,8 @@ msg_response = template(resp.response_errors[lang]).substitute(
 )
 
 clear()
-resp()
-print(resp.response_name)
-maxPoint = int(input(resp.response_max_points))
+print(resp.response_name[lang])
+maxPoint = int(input(resp.response_max_points[lang]))
 
 if maxPoint <= 0:
     print(f"\nNot a valid point input!\nYour input: {maxPoint}\nPlease restart the game, and choose a valid positive integer number!")
