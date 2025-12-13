@@ -1,8 +1,15 @@
 {
     "en": {
         "name": ">>> ROCK PAPER SCISSORS <<<",
+        "choices": "\nPlease choose!\n| Rock (r) | Paper (p) | Scissors (s) | Exit (exit) |   ",
+         "choicesRPS": {
+            "rock": "rock",
+            "paper": "paper",
+            "scissors": "scissors"
+        },
         "errors": {
-            "lang_errors": "\nNot a valid language input!\nPlease restart the game, and choose a valid language from the list!\nSupported languages: $langList\n"
+            "lang_errors": "\nNot a valid language input!\nPlease restart the game, and choose a valid language from the list!\nSupported languages: $langList\n",
+            "wrong_response": "\nNot a valid response!\nYour input:    $userInput\nPlease try again.\n"
         },
         "max_point": {
             "limit": "\nPlease specify the maximum amount of points!\nNote: The game will continue until You or the Computer reaches the specified amount of points!   ",
@@ -11,14 +18,29 @@
                 "too_low": "\nThe minimum point limit is 1!\nYour input:    $maxPoint\nPlease restart the game, and choose a valid positive integer number greater than 0",
                 "too_high": "\nThe maximum point limit is 100!\nYour input:    $maxPoint\nPlease restart the game, and choose a valid positive integer number under 100"
             }
+        },
+        "outcome": {
+            "win": "\nCongratulations, You've won this round!\nYou chose this:      $irasbanUser\nThe computer chose this: $self.irasban\n\nYour points:     $userPont\nComputer points: $compPont",
+            "draw": "\nThis round is a DRAW!\nYou chose this:      $irasbanUser\nThe computer chose this: $self.irasban\n\nYour points:     $userPont\nComputer points: $compPont",
+            "lose": "\nI'm sorry, You've lost!\nYou chose this:      $irasbanUser\nThe computer chose this: $self.irasban\n\nYour points:     $userPont\nComputer points: $compPont",
+            "continueQuestion": "\nNext round: ENTER!\nTo leave >> exit\n"
+        },
+        "overall_outcome": {
+            "userWin": "\nCongratulations! You were the first to win $maxPoint rounds!\n\n>> Scores:\n   Your score:       $userPoint\n   The computer's score:  $compPoint\n",
+            "userLose": "\nI'm sorry, the computer was the first to win $maxPoint rounds!\n\n>> Scores:\n   Your score:       $userPoint\n   The computer's score:  $compPoint\n"
         }
     },
-
-    
     "hu": {
         "name": ">>> KŐ PAPÍR OLLÓ <<<",
+        "choices": "\nKérlek válassz!\n| Kő (k) | Papír (p) | Olló (o) | Kilépés (vége) |   ",
+        "choicesRPS": {
+            "rock": "kő",
+            "paper": "papír",
+            "scissors": "olló"
+        },
         "errors": {
-            "lang_errors": "\nÉrvénytelen nyelv bemenet!\nKérlek indítsd újra a játékot, és válassz egy érvényes nyelvet a listából!\nTámogatott nyelvek: $langList\n"
+            "lang_errors": "\nÉrvénytelen nyelv bemenet!\nKérlek indítsd újra a játékot, és válassz egy érvényes nyelvet a listából!\nTámogatott nyelvek: $langList\n",
+            "wrong_response": "\nÉrvénytelen válasz!\nAmit megadtál:   $userInput\nKérlek próbáld újra.\n"
         },
         "max_point": {
             "limit": "\nKérlek add meg, hogy hány pontig menjen!\nMegjegyzés: Addig meg, amíg Te vagy a Gép el nem éri a megadott pontszámot!   ",
@@ -28,12 +50,21 @@
                 "too_high": "\nA megadott érték túl magas!\nAmit megadtál:    $maxPoint\nKérlek indítsd újra a játékot, és adj meg egy érvényes pozitív egész számot, ami kisebb mint 100"
             }
         },
-
-
-        "undefined": {
-            "errors": {
-                "lang_errors": "\nNot a valid language input!\nPlease restart the game, and choose a valid language from the list!\nSupported languages: $langList\n\nÉrvénytelen nyelv bemenet!\nKérlek indítsd újra a játékot, és válassz egy érvényes nyelvet a listából!\nTámogatott nyelvek: $langList\n"
-            }
+        "outcome": {
+            "win": "\nGratulálok, ezt a kört megnyerted!\nEzt választottad:      $irasbanUser\nA gép ezt választotta: $self.irasban\n\nPontszámod:   $userPont\nGép pontszáma: $compPont",
+            "draw": "\nEz a kör DÖNTETLEN!\nEzt választottad:      $irasbanUser\nA gép ezt választotta: $self.irasban\n\nPontszámod:   $userPont\nGép pontszáma: $compPont",
+            "lose": "\nSajnálom elvesztetted ezt a kört!\nEzt választottad:      $irasbanUser\nA gép ezt választotta: $self.irasban\n\nPontszámod:   $userPont\nGép pontszáma: $compPont",
+            "continueQuestion": "\nA következő körhöz ENTER!\nKilépéshez >> vége\n"
+        },
+        "overall_outcome": {
+            "userWin": "\nGratulálok, Te voltál az első aki megnyert $maxPoint kört!\n\n>> Pontszámok:\n   A Te pontszámod:  $userPoint\n   A Gép pontszáma:  $compPoint\n",
+            "userLose": "\nSajnálom, a Gép volt az első aki megnyert $maxPoint kört!\n\n>> Pontszámok:\n   A Te pontszámod:  $userPoint\n   A Gép pontszáma:  $compPoint\n"
+        }
+    },
+    "undefined": {
+        "errors": {
+            "lang_errors": "\nNot a valid language input!\nPlease restart the game, and choose a valid language from the list!\nSupported languages: $langList\n\nÉrvénytelen nyelv bemenet!\nKérlek indítsd újra a játékot, és válassz egy érvényes nyelvet a listából!\nTámogatott nyelvek: $langList\n",
+            "unexpected": "Unexpected error! Leaving imideately..."
         }
     }
 }
