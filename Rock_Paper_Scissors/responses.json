@@ -20,9 +20,9 @@
             }
         },
         "outcome": {
-            "win": "\nCongratulations, You've won this round!\nYou chose this:      $irasbanUser\nThe computer chose this: $self.irasban\n\nYour points:     $userPont\nComputer points: $compPont",
-            "draw": "\nThis round is a DRAW!\nYou chose this:      $irasbanUser\nThe computer chose this: $self.irasban\n\nYour points:     $userPont\nComputer points: $compPont",
-            "lose": "\nI'm sorry, You've lost!\nYou chose this:      $irasbanUser\nThe computer chose this: $self.irasban\n\nYour points:     $userPont\nComputer points: $compPont",
+            "win": "\nCongratulations, You've won this round!\nYou chose this:      $irasbanUser\nThe computer chose this: $computerChoice\n\nYour points:     $userPoint\nComputer points: $compPoint",
+            "draw": "\nThis round is a DRAW!\nYou chose this:      $irasbanUser\nThe computer chose this: $computerChoice\n\nYour points:     $userPoint\nComputer points: $compPoint",
+            "lose": "\nI'm sorry, You've lost!\nYou chose this:      $irasbanUser\nThe computer chose this: $computerChoice\n\nYour points:     $userPoint\nComputer points: $compPoint",
             "continueQuestion": "\nNext round: ENTER!\nTo leave >> exit\n"
         },
         "overall_outcome": {
@@ -51,9 +51,9 @@
             }
         },
         "outcome": {
-            "win": "\nGratulálok, ezt a kört megnyerted!\nEzt választottad:      $irasbanUser\nA gép ezt választotta: $self.irasban\n\nPontszámod:   $userPont\nGép pontszáma: $compPont",
-            "draw": "\nEz a kör DÖNTETLEN!\nEzt választottad:      $irasbanUser\nA gép ezt választotta: $self.irasban\n\nPontszámod:   $userPont\nGép pontszáma: $compPont",
-            "lose": "\nSajnálom elvesztetted ezt a kört!\nEzt választottad:      $irasbanUser\nA gép ezt választotta: $self.irasban\n\nPontszámod:   $userPont\nGép pontszáma: $compPont",
+            "win": "\nGratulálok, ezt a kört megnyerted!\nEzt választottad:      $irasbanUser\nA gép ezt választotta: $computerChoice\n\nPontszámod:   $userPoint\nGép pontszáma: $compPoint",
+            "draw": "\nEz a kör DÖNTETLEN!\nEzt választottad:      $irasbanUser\nA gép ezt választotta: $computerChoice\n\nPontszámod:   $userPoint\nGép pontszáma: $compPoint",
+            "lose": "\nSajnálom elvesztetted ezt a kört!\nEzt választottad:      $irasbanUser\nA gép ezt választotta: $computerChoice\n\nPontszámod:   $userPoint\nGép pontszáma: $compPoint",
             "continueQuestion": "\nA következő körhöz ENTER!\nKilépéshez >> vége\n"
         },
         "overall_outcome": {
