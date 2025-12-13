@@ -30,22 +30,22 @@ class resp():
 clear()
 resp()
 
-lang = input("Kérlek válaszd ki a nyelvet / Please choose the language:\n    >> Magyar (hu) | English (en) <<    ")
+lang_input = input("Kérlek válaszd ki a nyelvet / Please choose the language:\n    >> Magyar (hu) | English (en) <<    ")
 
-if lang.lower() == "magyar" or lang.lower() == "hu":
+if lang_input.lower() in ["magyar","hu"]:
     lang = "hu"
-elif lang.lower() == "english" or lang.lower() == "en":
+elif lang_input.lower() in ["english","en"]:
     lang = "en"
-elif lang not in langList:
+elif lang_input.lower() not in langList:
     lang="undefined"
-    msg_response = template(resp.errors).substitute(
+    msg_response = template(responses["hu"]["errors"]["lang_errors"]).substitute(
         langList=", ".join(langList)
     )
     clear()
     print(msg_response)
     exit()
 else:
-    print(resp.error_unexpected)
+    print(responses["undefined"]["errors"]["unexpected"])
     exit()
 
 resp.lang = lang
@@ -60,14 +60,6 @@ resp.max_points_too_high = responses[lang]["max_point"]["errors"]["too_high"]
 resp.outcome = responses[lang]["outcome"]
 resp.overall_outcome = responses[lang]["overall_outcome"]
 
-def msg_response_func_outer():
-    global msg_response
-    msg_response = template(resp.lang).safe_substitute(
-        lang=lang,
-        langList=", ".join(langList),
-    )
-
-msg_response_func_outer()
 clear()
 print(resp.name)
 maxPoint = int(input(resp.max_points))
@@ -78,62 +70,47 @@ if maxPoint <= 0:
 elif maxPoint > 100:
     print(resp.max_points_too_high)
     exit()
-elif maxPoint > 0 and maxPoint <=100:
-    pass
-else:
-    print(resp.error_unexpected)
-    exit()
 
 class comp:
     def __init__(self):
         self.choice = random.choice(choiceLIST)
         if lang == "hu":
-            if self.choice == "o":
-                self.irasban = "olló"
-            elif self.choice == "p":
-                self.irasban = "papír"
-            else:
-                self.irasban = "kő"
+            self.irasban = {"k": "kő", "p": "papír", "o": "olló"}[self.choice]
         elif lang == "en":
-            if self.choice == "o" or self.choice == "s":
-                self.irasban = "scissors"
-            elif self.choice == "p":
-                self.irasban = "paper"
-            else:
-                self.irasban = "rock"
-    
-    def game(self, user_choice, irasbanUser):
+            self.irasban = {"k": "rock", "p": "paper", "o": "scissors"}[self.choice]
+
+    def game(self):
         global userPoint, compPoint, continueQuestion
 
-        msg_response = template(resp.lang).safe_substitute(
-            lang=lang,
-            langList=", ".join(langList),
+        if user == self.choice:
+            result_template = responses[lang]["outcome"]["draw"]
+        elif (user == "k" and self.choice == "o") or \
+             (user == "p" and self.choice == "k") or \
+             (user == "o" and self.choice == "p"):
+            result_template = responses[lang]["outcome"]["win"]
+        else:
+            result_template = responses[lang]["outcome"]["lose"]
+
+
+        clear()
+        print(resp.name)
+
+        if (user == "k" and self.choice == "o") or \
+           (user == "p" and self.choice == "k") or \
+           (user == "o" and self.choice == "p"):
+            userPoint += 1
+        elif user != self.choice:
+            compPoint += 1
+
+        msg_response = template(result_template).safe_substitute(
             irasbanUser=irasbanUser,
             computerChoice=self.irasban,
-            userPont=userPoint,
-            compPont=compPoint
-)
+            userPoint=userPoint,
+            compPoint=compPoint
+        )
+        print(msg_response)
 
-
-
-        if user_choice == "k" and self.choice == "o" or \
-           user_choice == "p" and self.choice == "k" or \
-           user_choice == "o" and self.choice == "p":
-            userPoint += 1
-            clear()
-            print(resp.name)
-            print(resp.outcome["win"])
-        elif user_choice == self.choice:
-            clear()
-            print(resp.name)
-            print(resp.outcome["draw"])
-        else:
-            compPoint += 1
-            clear()
-            print(resp.name)
-            print(resp.outcome["lose"])
-
-        continueQuestion = input(resp.outcome["continueQuestion"])
+        continueQuestion = input(responses[lang]["outcome"]["continueQuestion"])
         if continueQuestion.lower() in ["vége","vege","exit"]:
             clear()
             exit()
@@ -174,13 +151,20 @@ while userPoint < maxPoint and compPoint < maxPoint:
         irasbanUser = resp.choicesRPS["rock"]
 
     computer = comp()
-    computer.game(user, irasbanUser)
+    computer.game()
 
+clear()
+print(resp.name)
 if userPoint == maxPoint:
-    clear()
-    print(resp.name)
-    print(f"\nGratulálok, Te voltál az első aki megnyert {maxPoint} kört!\n\n>> Pontszámok:\n   A Te pontszámod:  {userPoint}\n   A Gép pontszáma:  {compPoint}\n")
+    result_template = responses[lang]["overall_outcome"]["userWin"]
 else:
-    clear()
-    print(resp.name)
-    print(f"\nSajnálom, a gép volt az aki elsőnek megnyert {maxPoint} kört!\n\n>> Pontszámok:\n   A Te pontszámod:  {userPoint}\n   A Gép pontszáma:  {compPoint}\n")
+    result_template = responses[lang]["overall_outcome"]["userLose"]
+
+msg_response = template(result_template).safe_substitute(
+    userPoint=userPoint,
+    compPoint=compPoint,
+    maxPoint=maxPoint
+)
+
+print(msg_response)
+
