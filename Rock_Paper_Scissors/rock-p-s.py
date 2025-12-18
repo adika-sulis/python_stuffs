@@ -30,15 +30,20 @@ class resp():
 clear()
 resp()
 
-lang_input = input("Kérlek válaszd ki a nyelvet / Please choose the language:\n    >> Magyar (hu) | English (en) <<    ")
+lang_input = input("Kérlek válaszd ki a nyelvet / Please choose the language:\n    >> Magyar (hu) | English (en) <<    ").lower()
 
-if lang_input.lower() in ["magyar","hu"]:
+if lang_input in ["magyar","hu"]:
     lang = "hu"
-elif lang_input.lower() in ["english","en"]:
+elif lang_input in ["english","en"]:
     lang = "en"
-elif lang_input.lower() not in langList:
+elif lang_input == ["vége", "kilépés", "vege", "kilepes", "exit", "quit", "q", "close", "e", "end", ":wq"]:
+    msg_response = template(responses["undefined"]["end"]["lang_input"]).substitute()
+    clear()
+    print(msg_response)
+    exit()
+elif lang_input not in langList:
     lang="undefined"
-    msg_response = template(responses["hu"]["errors"]["lang_errors"]).substitute(
+    msg_response = template(responses["undefined"]["errors"]["lang_errors"]).substitute(
         langList=", ".join(langList)
     )
     clear()
@@ -61,15 +66,42 @@ resp.outcome = responses[lang]["outcome"]
 resp.overall_outcome = responses[lang]["overall_outcome"]
 
 clear()
-print(resp.name)
-maxPoint = int(input(resp.max_points))
 
+# Max pontszám beállítása. Mostmár kommentelem mert szöveg nélkül belebonyolodok 😭 | Also emojik: WIN+É
+
+print(resp.name)
+maxPoint = input(resp.max_points)
+
+wrong_response_max_point = template(responses[lang]["errors"]["wrong_response"]).safe_substitute(
+    userInput=maxPoint
+)
+
+def error_max_point_func():
+    global maxPoint, error_max_point
+    error_max_point = template(errorMaxPoint).safe_substitute(
+        maxPoint = maxPoint,
+        userInput = maxPoint
+    )
+
+try:
+    maxPoint = int(maxPoint)
+
+except ValueError:
+    errorMaxPoint = responses[lang]["errors"]["wrong_response"]
+    error_max_point_func()
+    clear()
+    print(error_max_point)
+    exit()
 if maxPoint <= 0:
-    print(resp.max_points_too_low)
-    exit()
+    errorMaxPoint = responses[lang]["max_point"]["errors"]["too_low"]
 elif maxPoint > 100:
-    print(resp.max_points_too_high)
-    exit()
+    errorMaxPoint = responses[lang]["max_point"]["errors"]["too_high"]
+
+error_max_point_func()
+clear()
+print(error_max_point)
+exit()
+
 
 class comp:
     def __init__(self):
