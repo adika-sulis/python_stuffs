@@ -36,7 +36,7 @@ if lang_input in ["magyar","hu"]:
     lang = "hu"
 elif lang_input in ["english","en"]:
     lang = "en"
-elif lang_input == ["vége", "kilépés", "vege", "kilepes", "exit", "quit", "q", "close", "e", "end", ":wq"]:
+elif lang_input in ["vége", "kilépés", "vege", "kilepes", "exit", "quit", "q", "close", "e", "end", ":wq"]:
     msg_response = template(responses["undefined"]["end"]["lang_input"]).substitute()
     clear()
     print(msg_response)
@@ -154,7 +154,9 @@ while userPoint < maxPoint and compPoint < maxPoint:
     print(resp.name)
 
     user = input(resp.choices)
-
+    wrongChoice = template(responses[lang]["errors"]["wrong_choice"]).safe_substitute(
+        userInput = user
+    )
     while True:
         if not user:
             clear()
@@ -172,7 +174,7 @@ while userPoint < maxPoint and compPoint < maxPoint:
         elif user not in ["p","k","o"]:
             clear()
             print(resp.name)
-            print(resp.error_wrong_response)
+            print(wrongChoice)
             user = input(resp.choices)
         else:
             break
