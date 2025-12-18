@@ -92,15 +92,17 @@ except ValueError:
     clear()
     print(error_max_point)
     exit()
-if maxPoint <= 0:
-    errorMaxPoint = responses[lang]["max_point"]["errors"]["too_low"]
-elif maxPoint > 100:
-    errorMaxPoint = responses[lang]["max_point"]["errors"]["too_high"]
-
-error_max_point_func()
-clear()
-print(error_max_point)
-exit()
+if maxPoint <= 0 or maxPoint > 100: 
+    if maxPoint <= 0:
+        errorMaxPoint = responses[lang]["max_point"]["errors"]["too_low"]
+    elif maxPoint > 100:
+        errorMaxPoint = responses[lang]["max_point"]["errors"]["too_high"]
+    error_max_point_func()
+    clear()
+    print(error_max_point)
+    exit()
+else:
+    pass
 
 
 class comp:
