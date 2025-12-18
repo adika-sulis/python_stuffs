@@ -65,6 +65,9 @@
         "errors": {
             "lang_errors": "\nNot a valid language input!\nPlease restart the game, and choose a valid language from the list!\nSupported languages: $langList\n\nÉrvénytelen nyelv bemenet!\nKérlek indítsd újra a játékot, és válassz egy érvényes nyelvet a listából!\nTámogatott nyelvek: $langList\n",
             "unexpected": "Unexpected error! Leaving imideately..."
+        },
+        "end": {
+            "lang_input": "\nYou have chosen to exit the game early.\nClosing the game... \n\nHamar kiléptél a játékból.\nJáték bezárása...\n"
         }
     }
 }

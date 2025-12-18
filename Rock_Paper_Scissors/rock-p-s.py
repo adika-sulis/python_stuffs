@@ -1,7 +1,7 @@
 import os, random, json
 from string import Template as template
 
-with open("Rock_Paper_Scissors/responses.json", "r", encoding="utf-8") as f:
+with open(f"{os.path.dirname(__file__)}/responses.json", "r", encoding="utf-8") as f:
     responses = json.load(f)
 
 def clear():
@@ -167,4 +167,3 @@ msg_response = template(result_template).safe_substitute(
 )
 
 print(msg_response)
-
