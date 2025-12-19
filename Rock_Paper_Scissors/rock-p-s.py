@@ -64,6 +64,10 @@ resp.max_points_too_low = responses[lang]["max_point"]["errors"]["too_low"]
 resp.max_points_too_high = responses[lang]["max_point"]["errors"]["too_high"]
 resp.outcome = responses[lang]["outcome"]
 resp.overall_outcome = responses[lang]["overall_outcome"]
+resp.wrong_choice = responses[lang]["errors"]["wrong_choice"]
+resp.error_max_point = responses[lang]["errors"]["wrong_response"]
+resp.win = responses[lang]["overall_outcome"]["userWin"]
+resp.lose = responses[lang]["overall_outcome"]["userLose"]
 
 clear()
 
@@ -72,7 +76,7 @@ clear()
 print(resp.name)
 maxPoint = input(resp.max_points)
 
-wrong_response_max_point = template(responses[lang]["errors"]["wrong_response"]).safe_substitute(
+wrong_response_max_point = template(resp.error_wrong_response).safe_substitute(
     userInput=maxPoint
 )
 
@@ -87,16 +91,16 @@ try:
     maxPoint = int(maxPoint)
 
 except ValueError:
-    errorMaxPoint = responses[lang]["errors"]["wrong_response"]
+    errorMaxPoint = resp.error_wrong_response
     error_max_point_func()
     clear()
     print(error_max_point)
     exit()
 if maxPoint <= 0 or maxPoint > 100: 
     if maxPoint <= 0:
-        errorMaxPoint = responses[lang]["max_point"]["errors"]["too_low"]
+        errorMaxPoint = resp.max_points_too_low
     elif maxPoint > 100:
-        errorMaxPoint = responses[lang]["max_point"]["errors"]["too_high"]
+        errorMaxPoint = resp.max_points_too_high
     error_max_point_func()
     clear()
     print(error_max_point)
@@ -144,7 +148,7 @@ class comp:
         )
         print(msg_response)
 
-        continueQuestion = input(responses[lang]["outcome"]["continueQuestion"])
+        continueQuestion = input(resp.outcome["continueQuestion"])
         if continueQuestion.lower() in ["vége","vege","exit"]:
             clear()
             exit()
@@ -154,7 +158,7 @@ while userPoint < maxPoint and compPoint < maxPoint:
     print(resp.name)
 
     user = input(resp.choices)
-    wrongChoice = template(responses[lang]["errors"]["wrong_choice"]).safe_substitute(
+    wrongChoice = template(resp.wrong_choice).safe_substitute(
         userInput = user
     )
     while True:
@@ -192,9 +196,9 @@ while userPoint < maxPoint and compPoint < maxPoint:
 clear()
 print(resp.name)
 if userPoint == maxPoint:
-    result_template = responses[lang]["overall_outcome"]["userWin"]
+    result_template = resp.win
 else:
-    result_template = responses[lang]["overall_outcome"]["userLose"]
+    result_template = resp.lose
 
 msg_response = template(result_template).safe_substitute(
     userPoint=userPoint,
