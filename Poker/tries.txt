@@ -1,0 +1,12 @@
+
+------------------
+JÁTÉKOS
+   ELSŐ Kártya: 10 black clubs
+   MÁSODIK Kártya: queen black clubs       
+------------------
+
+------------------
+COMP
+    ELSŐ Kártya: 6 red hearts
+    MÁSODIK Kártya: 4  red hearts
+------------------

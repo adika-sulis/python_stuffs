@@ -6,7 +6,7 @@ clear()
 
 cards = [2, 3, 4, 5, 6, 7, 8, 9, 10, "ace", "jack", "queen", "king"]
 card_symbols = ["spades", "hearts", "diamonds", "clubs"]
-card_colors = ["black", "red"]
+# card_colors = ["black", "red"]
 
 class player:
     def __init__(self, card, color, symbol):
@@ -31,5 +31,36 @@ for _ in range(2):
     except ValueError:
         pass
 
-print(f"\n------------------\nELSŐ Kártya: {card_one.card} {card_one.symbol} {card_one.color}\nMÁSODIK Kártya: {card_two.card} {card_two.symbol} {card_two.color}\n------------------\n")
+class comp:
+    def __init__(self, comp_card, comp_color, comp_symbol):
+        self.comp_card = comp_card
+        self.comp_color = comp_color
+        self.comp_symbol = comp_symbol
+
+counter = 0
+for _ in range(2):
+    try:
+        comp_card = random.choice(cards)
+        comp_symbol = random.choice(card_symbols)
+        if comp_symbol in ["spades", "clubs"]:
+            comp_color = "black"
+        else:
+            comp_color = "red"
+        if counter == 0:
+            comp_card_one = comp(comp_card, comp_symbol, comp_color)
+            counter += 1
+        else:
+            comp_card_two = comp(comp_card, comp_symbol, comp_color)               
+    except ValueError:
+        pass
+
+try:
+    open(f"{os.path.dirname(__file__)}/tries.txt", "w", encoding="utf-8")
+except FileNotFoundError:
+        open(f"{os.path.dirname(__file__)}/tries.txt", "a")
+
+with open(f"{os.path.dirname(__file__)}/tries.txt", "w", encoding="utf-8") as t:
+    t.write(f"\n------------------\nJÁTÉKOS\n   ELSŐ Kártya: {card_one.card} {card_one.symbol} {card_one.color}\n   MÁSODIK Kártya: {card_two.card} {card_two.symbol} {card_two.color}       \n------------------\n")
+    t.write(f"\n------------------\nCOMP\n    ELSŐ Kártya: {comp_card_one.comp_card} {comp_card_one.comp_symbol} {comp_card_one.comp_color}\n    MÁSODIK Kártya: {comp_card_two.comp_card}  {comp_card_two.comp_symbol} {comp_card_two.comp_color}\n------------------\n")
+
 
