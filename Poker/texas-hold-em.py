@@ -12,9 +12,9 @@ removedCards = []
 # balances
 compBal = 5000
 userBal = 5000
-bettingPool = None
+bettingPool = 0
 minimumBetAmount = 1.15
-previousBet = None
+previousBet = 0
 
 def removeUsedCardFromCards():
     for usedCARD in usedCards:
@@ -198,14 +198,15 @@ def compMove():
                 compBet = compBal
 
         previousBet = compBet
-        bettingPool + compBet
-        compBal - compBet
+        bettingPool += compBet
+        compBal -= compBet
 
 
 firstRound = True
 
 while True:
-    usersMove = input("What will you do?\n Stand (s) | Fold (f) | Bet (b)")
+    print("What will you do?\n Stand (s) | Fold (f) | Bet (b)    ")
+    usersMove = input(f"\nYour balance: {userBal}\n\n")
     if not usersMove:
         pass
     elif usersMove.strip().lower() in ["s","f","b"]:
@@ -217,21 +218,29 @@ while True:
             break
         elif usersMove.strip().lower() == "b":
             if firstRound == True:
-                userBet = int(input("Please give me your bet!\n Minimum 25:   "))
-                if # to be continued
-        elif firstRound == False:
-            if previousBet != None:
-                userBet = random.randint(previousBet, compBal+1) * minimumBetAmount
-            else:
-                userBet = random.randint(25, compBal+1) * minimumBetAmount
-
-            if compBal < 0:
-                userBet = compBal
-        bettingPool + userBet
-        compBal - userBet
+                try:
+                    clear()
+                    print(F"Please give me your bet!\n Minimum 25")
+                    userBet = int(input(f" Your balance: {userBal}\n\nYour bet:    "))
+                    if userBal >= userBet:
+                        pass # for now. >> program it so it actually does something
+                    elif userBet > userBal:
+                        pass
+                except ValueError:
+                    clear()
+                    print(f"Invalid input!\n Give a number that less than your balance: {userBal}")
+                    userBet = int(input("Please give me your bet!\n Minimum 25:   "))
+                
+        bettingPool += userBet
+        userBal -= userBet
         previousBet = userBet
         break
     else:
         pass
 
-firstRound = False
+compMove()
+try:
+    print(f" USER BET: {userBet}\n USER BAL: {userBal}\n COMP BET: {compBet}\n COMP BAL: {compBal}\n BETTING POOL: {bettingPool}\n PREVIOUS BET: {previousBet} ")
+except NameError: # NAME ERROR if NO compbet!
+    print(f" USER BET: {userBet}\n USER BAL: {userBal}\n COMP BET: 0\n COMP BAL: {compBal}\n BETTING POOL: {bettingPool}\n PREVIOUS BET: {previousBet} ")
+firstRound = False 
