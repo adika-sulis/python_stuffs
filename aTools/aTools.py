@@ -9,6 +9,8 @@ def pinput(message:str, unit:str=""):
         x = x.removeprefix(unit)
     elif x.endswith(unit):
         x = x.removesuffix(unit)
+    if x == "":
+        return ""
     try:
         x = int(x)
     except ValueError:
