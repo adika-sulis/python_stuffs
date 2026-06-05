@@ -1,3 +1,7 @@
+def cls():
+    import os
+    os.system("cls" if os.name == "nt" else "clear")
+
 def pinput(message:str, unit:str=""):
     x = input(message)
     x = x.strip()
